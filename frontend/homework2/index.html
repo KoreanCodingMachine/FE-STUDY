@@ -85,20 +85,15 @@
         }
     </style>
     <script>
-        $.ajax({
-            type: "GET",
-            url: "http://spartacodingclub.shop/sparta_api/seoulair",
-            data: {},
-            success: function (response) {
-                console.log(response)
-                let mise_list = response["RealtimeCityAir"]["row"];
-                for (let i = 0; i < mise_list.length; i++) {
-                    let mise = mise_list[i]
-                    let gu_name = mise["MSRSTE_NM"];
-                    let gu_mise = mise["IDEX_MVL"];
-                    console.log(gu_name, gu_mise);
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/sparta_api/weather/seoul",
+                data: {},
+                success: function (response) {
+                    $('#temp').text(response['temp'])
                 }
-            }
+            })
         })
 
         function open_box() {
@@ -113,7 +108,9 @@
 <body>
     <div class="mytitle">
         <h1>내 생애 최고의 영화들</h1>
+        <p>현재기온 : <span id="temp">36</span>도</p>
         <button onclick="open_box()">영화 기록하기</button>
+    </div>
     </div>
     <div class="mypost" id="post-box">
         <div class="form-floating mb-3">
